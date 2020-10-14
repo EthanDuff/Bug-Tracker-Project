@@ -177,11 +177,6 @@ namespace BugTracker {
 		}
 
 		private void Click_LoginButton(object sender, EventArgs e) {
-			if(LoginEmailTextbox.Text == "" && LoginPasswordTextbox.Text == "") {
-				LoginEmailTextbox.Text = "test@gmail.com";
-				LoginPasswordTextbox.Text = "AdminAccount";
-			}
-
 			AlertLabel.Visible = false;
 			SuccessMessage LoginAttempt = _Controller.Login(LoginEmailTextbox.Text, LoginPasswordTextbox.Text);
 			if(!LoginAttempt.Success) {
