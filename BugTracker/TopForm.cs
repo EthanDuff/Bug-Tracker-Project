@@ -685,7 +685,7 @@ namespace BugTracker {
 
 					ProjectCache = _Controller.GetMyProjects(account.Id);
 					ProjectCache.ForEach(delegate (Project project) {
-						ResultsBox2.Items.Add("    " + project.Name);
+						ResultsBox2.Items.Add("  " + project.Name);
 					});
 					ResultsBox2.Items.Add("");
 
@@ -1011,6 +1011,7 @@ namespace BugTracker {
 			ResultsBox2.Font = new System.Drawing.Font("Consolas", FontSize(14), System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			GeneralTextbox.Visible = true;
 			GeneralTextbox.Location = Relocate(675, 550);
+			GeneralTextbox.Size = ResizeElement(375, 26);
 			GeneralTextbox.MaxLength = 25;
 
 			ResultsBox2.Visible = true;
@@ -1038,6 +1039,7 @@ namespace BugTracker {
 			GeneralTextbox.Location = Relocate(675, 550);
 			GeneralTextbox.Text = "";
 			GeneralTextbox.MaxLength = 50;
+			GeneralTextbox.Size = ResizeElement(375, 26);
 
 			ResultsBox2.Visible = true;
 			ResultsBox2.Location = Relocate(1115, 600);

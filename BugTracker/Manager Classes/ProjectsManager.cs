@@ -19,7 +19,7 @@ namespace BugTracker.Manager_Classes {
 
 		public List<Project> GetMyProjects(int Id) {
 
-			string query = "  SELECT * FROM Projects a INNER JOIN AccountsOnProjects b ON a.ProjectId = b.ProjectId WHERE b.AccountId = @MyId";
+			string query = "SELECT * FROM Projects a INNER JOIN AccountsOnProjects b ON a.ProjectId = b.ProjectId WHERE b.AccountId = @MyId";
 			List<Project> Projects = new List<Project>();
 
 			using(SQLiteCommand command = new SQLiteCommand(query, Model.connection)) {
@@ -35,7 +35,7 @@ namespace BugTracker.Manager_Classes {
 		public List<Project> GetProjects() {
 			List<Project> Projects = new List<Project>();
 
-			string query = "  SELECT * FROM Projects WHERE NOT Retired = 'True'";
+			string query = "SELECT * FROM Projects WHERE Retired = false";
 			using(SQLiteDataReader DataReader = new SQLiteCommand(query, Model.connection).ExecuteReader()){
 				while(DataReader.Read()) {
 					Projects.Add(new Project(DataReader.GetInt32(0), DataReader.GetString(1), DataReader.GetString(2), DataReader.GetString(3)));
@@ -45,7 +45,7 @@ namespace BugTracker.Manager_Classes {
 		}
 		public List<Account> GetAccountsOnProject(int Id) {
 
-			string query = "  SELECT UserId, UserEmail, UserName, UserRole FROM UserAccounts, AccountsOnProjects, Projects WHERE Projects.ProjectId = @Id AND Projects.ProjectId = AccountsOnProjects.ProjectId AND UserAccounts.UserId = AccountsOnProjects.AccountId ORDER BY UserName";
+			string query = "SELECT UserId, UserEmail, UserName, UserRole FROM UserAccounts, AccountsOnProjects, Projects WHERE Projects.ProjectId = @Id AND Projects.ProjectId = AccountsOnProjects.ProjectId AND UserAccounts.UserId = AccountsOnProjects.AccountId ORDER BY UserName";
 
 			List<Account> Accounts = new List<Account>();
 
@@ -61,7 +61,7 @@ namespace BugTracker.Manager_Classes {
 		}
 		public List<Account> GetAccountsOffProject(int Id) {
 
-			string query = "  SELECT UserId, UserEmail, UserName, UserRole FROM UserAccounts WHERE NOT EXISTS ( " +
+			string query = "SELECT UserId, UserEmail, UserName, UserRole FROM UserAccounts WHERE NOT EXISTS ( " +
 				"SELECT * FROM AccountsOnProjects " +
 				"WHERE AccountsOnProjects.AccountId = UserAccounts.UserId " +
 				"AND AccountsOnProjects.ProjectId = @Id" +
@@ -107,7 +107,7 @@ namespace BugTracker.Manager_Classes {
 					}
 				
 
-					using(SQLiteCommand command = new SQLiteCommand("  INSERT INTO Projects VALUES(@Id, @Name, @Description, @Designation, 0)", Model.connection)) {
+					using(SQLiteCommand command = new SQLiteCommand("INSERT INTO Projects VALUES(@Id, @Name, @Description, @Designation, 0)", Model.connection)) {
 						command.Parameters.AddWithValue("@Id", NewId);
 						command.Parameters.AddWithValue("@Name", Name);
 						command.Parameters.AddWithValue("@Description", Description);
@@ -118,7 +118,7 @@ namespace BugTracker.Manager_Classes {
 				}
 
 				int Id = 0;
-				string query = "  SELECT ProjectId FROM Projects WHERE ProjectName = @Name AND ProjectDescription = @Description AND BugDesignation = @Designation";
+				string query = "SELECT ProjectId FROM Projects WHERE ProjectName = @Name AND ProjectDescription = @Description AND BugDesignation = @Designation";
 
 
 					using(SQLiteCommand command = new SQLiteCommand(query, Model.connection)) {
@@ -158,7 +158,7 @@ namespace BugTracker.Manager_Classes {
 				// Update Bugs //
 
 				List<string> Bugs = new List<string>();
-				using(SQLiteCommand command = new SQLiteCommand("  SELECT BugDesignation FROM Bugs WHERE ProjectId = @Id", Model.connection)) {
+				using(SQLiteCommand command = new SQLiteCommand("SELECT BugDesignation FROM Bugs WHERE ProjectId = @Id", Model.connection)) {
 					command.Parameters.AddWithValue("@Id", Id);
 					SQLiteDataReader Reader = command.ExecuteReader();
 					while(Reader.Read()) {
@@ -171,14 +171,14 @@ namespace BugTracker.Manager_Classes {
 
 				// Resolve Bugs //
 
-				using(SQLiteCommand command = new SQLiteCommand("  UPDATE Bugs SET BugStatus = 'Resolved' WHERE ProjectId = @Id", Model.connection)) {
+				using(SQLiteCommand command = new SQLiteCommand("UPDATE Bugs SET BugStatus = 'Resolved' WHERE ProjectId = @Id", Model.connection)) {
 					command.Parameters.AddWithValue("@Id", Id);
 					command.ExecuteScalar();
 				}
 
 				// Retire Project //
 
-				using(SQLiteCommand command = new SQLiteCommand("  UPDATE Projects SET Retired = 'true' WHERE ProjectId = @Id", Model.connection)) {
+				using(SQLiteCommand command = new SQLiteCommand("UPDATE Projects SET Retired = 'true' WHERE ProjectId = @Id", Model.connection)) {
 					command.Parameters.AddWithValue("@Id", Id);
 					command.ExecuteScalar();
 				}
@@ -216,7 +216,7 @@ namespace BugTracker.Manager_Classes {
 			}
 		
 		public bool DoesProjectExist(string Name) {
-			using(SQLiteCommand command = new SQLiteCommand("  SELECT Retired FROM Projects WHERE ProjectName = @Name", Model.connection)) {
+			using(SQLiteCommand command = new SQLiteCommand("SELECT Retired FROM Projects WHERE ProjectName = @Name", Model.connection)) {
 				
 				command.Parameters.AddWithValue("@Name", Name);
 				SQLiteDataReader DataReader = command.ExecuteReader();
@@ -256,7 +256,7 @@ namespace BugTracker.Manager_Classes {
 
 				List<string> Designations = new List<string>();
 
-				using(SQLiteCommand command = new SQLiteCommand("  SELECT BugDesignation FROM Bugs WHERE ProjectId = @PID AND AccountId = @AID", Model.connection)) {
+				using(SQLiteCommand command = new SQLiteCommand("SELECT BugDesignation FROM Bugs WHERE ProjectId = @PID AND AccountId = @AID", Model.connection)) {
 					;
 					command.Parameters.AddWithValue("@AID", AccountId);
 					command.Parameters.AddWithValue("@PID", ProjectId);

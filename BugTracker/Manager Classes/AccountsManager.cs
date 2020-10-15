@@ -149,7 +149,7 @@ namespace BugTracker.Manager_Classes {
 
 				// UNASSIGN BUGS //
 
-				using(SQLiteCommand command = new SQLiteCommand(" UPDATE Bugs SET AccountId = null, WHERE AccountId = @Id", Model.connection)) {
+				using(SQLiteCommand command = new SQLiteCommand(" UPDATE Bugs SET AccountId = null WHERE AccountId = @Id", Model.connection)) {
 					command.Parameters.AddWithValue("@Id", Id);
 					command.ExecuteScalar();
 				}

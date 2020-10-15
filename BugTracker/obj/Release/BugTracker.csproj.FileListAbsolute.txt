@@ -29,3 +29,33 @@ C:\Users\ethan\source\repos\BugTrackerGit\BugTracker\obj\Release\BugTracker.cspr
 C:\Users\ethan\source\repos\BugTrackerGit\BugTracker\obj\Release\BugTracker.csproj.CopyComplete
 C:\Users\ethan\source\repos\BugTrackerGit\BugTracker\obj\Release\BugTracker.exe
 C:\Users\ethan\source\repos\BugTrackerGit\BugTracker\obj\Release\BugTracker.pdb
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\x86\sqlite3.dll
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\x64\sqlite3.dll
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\BugTracker.exe.config
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\BugTracker.exe
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\BugTracker.pdb
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\EntityFramework.dll
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\System.Buffers.dll
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\System.Data.SQLite.dll
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\System.Data.SQLite.EF6.dll
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\System.Data.SQLite.Linq.dll
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\System.Memory.dll
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\System.Numerics.Vectors.dll
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\EntityFramework.xml
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\System.Buffers.xml
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\System.Data.SQLite.xml
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\System.Data.SQLite.dll.config
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\System.Memory.xml
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\System.Numerics.Vectors.xml
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\obj\Release\BugTracker.csprojAssemblyReference.cache
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\obj\Release\BugTracker.Properties.Resources.resources
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\obj\Release\BugTracker.TopForm.resources
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\obj\Release\BugTracker.csproj.GenerateResource.cache
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\obj\Release\BugTracker.csproj.CoreCompileInputs.cache
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\obj\Release\BugTracker.csproj.CopyComplete
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\obj\Release\BugTracker.exe
+C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\obj\Release\BugTracker.pdb

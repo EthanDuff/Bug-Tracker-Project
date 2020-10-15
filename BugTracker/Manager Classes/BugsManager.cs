@@ -34,7 +34,7 @@ namespace BugTracker.Manager_Classes {
 						command.ExecuteScalar();
 					}
 				
-					using(SQLiteCommand command2 = new SQLiteCommand("  INSERT INTO BugUpdates VALUES(@Designation, @DateTime, @Description)", Model.connection)) {
+					using(SQLiteCommand command2 = new SQLiteCommand("INSERT INTO BugUpdates VALUES(@Designation, @DateTime, @Description)", Model.connection)) {
 						
 						command2.Parameters.AddWithValue("@DateTime", DateTime.Now);
 						command2.Parameters.AddWithValue("@Designation", Designation);
@@ -52,7 +52,7 @@ namespace BugTracker.Manager_Classes {
 		public List<Bug> GetMyBugs(int Id) {
 
 			List<Bug> Bugs = new List<Bug>();
-			string query = "  SELECT * FROM Bugs WHERE AccountId = @M Id AND NOT BugStatus = 'Resolved' ORDER BY BugStatus";
+			string query = "SELECT * FROM Bugs WHERE AccountId = @MyId AND NOT BugStatus = 'Resolved' ORDER BY BugStatus";
 
 			using(SQLiteCommand command = new SQLiteCommand(query, Model.connection)) {
 				
@@ -86,7 +86,10 @@ namespace BugTracker.Manager_Classes {
 				while(DataReader.Read()) {
 
 					if(DataReader.GetString(4) == "Assigned" && Model.ActiveAccount.Id == DataReader.GetInt32(1)) {
-						Bugs.Add(new Bug(DataReader.GetInt32(0), DataReader.GetInt32(1), DataReader.GetString(2), DataReader.GetString(3), DataReader.GetString(4) + " To You"));
+						if(DataReader.IsDBNull(1))
+							Bugs.Add(new Bug(DataReader.GetInt32(0), 0, DataReader.GetString(2), DataReader.GetString(3), DataReader.GetString(4) + " To You"));
+						else
+							Bugs.Add(new Bug(DataReader.GetInt32(0), DataReader.GetInt32(1), DataReader.GetString(2), DataReader.GetString(3), DataReader.GetString(4) + " To You"));
 					}
 					else {
 						Bugs.Add(new Bug(DataReader.GetInt32(0), 0, DataReader.GetString(2), DataReader.GetString(3), DataReader.GetString(4)));
@@ -177,7 +180,7 @@ namespace BugTracker.Manager_Classes {
 		public List<BugUpdate> GetBugUpdates(string Designation) {
 			List<BugUpdate> Updates = new List<BugUpdate>();
 
-			string query = "  SELECT * FROM BugUpdates WHERE BugDesignation = @Designation";
+			string query = "SELECT * FROM BugUpdates WHERE BugDesignation = @Designation";
 
 				
 				using(SQLiteCommand command = new SQLiteCommand(query, Model.connection)) {
@@ -216,11 +219,14 @@ namespace BugTracker.Manager_Classes {
 			if(Model.ActiveAccount.Role != "Administrator")
 				return Bugs;
 
-			string query = "  SELECT * FROM Bugs WHERE BugStatus = 'Submitted'";
+			string query = "SELECT * FROM Bugs WHERE BugStatus = 'Submitted'";
 
 			using(SQLiteDataReader DataReader = new SQLiteCommand(query, Model.connection).ExecuteReader()){
 				while(DataReader.Read()) {
-					Bugs.Add(new Bug(DataReader.GetInt32(0), DataReader.GetInt32(1), DataReader.GetString(2), DataReader.GetString(3), DataReader.GetString(4)));
+					if(DataReader.IsDBNull(1))
+						Bugs.Add(new Bug(DataReader.GetInt32(0), 0, DataReader.GetString(2), DataReader.GetString(3), DataReader.GetString(4)));
+					else
+						Bugs.Add(new Bug(DataReader.GetInt32(0), DataReader.GetInt32(1), DataReader.GetString(2), DataReader.GetString(3), DataReader.GetString(4)));
 				}
 			}
 			return Bugs;
@@ -230,7 +236,7 @@ namespace BugTracker.Manager_Classes {
 			if(Model.ActiveAccount.Role != "Administrator")
 				return Bugs;
 
-			string query = "  SELECT * FROM Bugs WHERE BugStatus = 'Unassigned'";
+			string query = "SELECT * FROM Bugs WHERE BugStatus = 'Unassigned'";
 
 			using(SQLiteDataReader DataReader = new SQLiteCommand(query, Model.connection).ExecuteReader()) {
 				while(DataReader.Read()) {
@@ -242,7 +248,7 @@ namespace BugTracker.Manager_Classes {
 		}
 		public SuccessMessage ResolveBug(string Designation) {
 			if(Test == false) {
-				string query = "  UPDATE Bugs SET BugStatus = 'Resolved' WHERE BugDesignation = @Designation";
+				string query = "UPDATE Bugs SET BugStatus = 'Resolved' WHERE BugDesignation = @Designation";
 
 				using(SQLiteCommand command = new SQLiteCommand(query, Model.connection)) {
 					
@@ -256,7 +262,7 @@ namespace BugTracker.Manager_Classes {
 		}
 		public SuccessMessage RejectBug(string Designation) {
 			if(Test == false) {
-				string query = "  UPDATE Bugs SET BugStatus = 'Assigned' WHERE BugDesignation = @Designation";
+				string query = "UPDATE Bugs SET BugStatus = 'Assigned' WHERE BugDesignation = @Designation";
 
 				using(SQLiteCommand command = new SQLiteCommand(query, Model.connection)) {
 					
@@ -270,7 +276,7 @@ namespace BugTracker.Manager_Classes {
 		}
 		public SuccessMessage AssignBug(string Designation, int Id) {
 			if(Test == false) {
-				string query = "  UPDATE Bugs SET BugStatus = 'Assigned', AccountId = @Id WHERE BugDesignation = @Designation";
+				string query = "UPDATE Bugs SET BugStatus = 'Assigned', AccountId = @Id WHERE BugDesignation = @Designation";
 
 				using(SQLiteCommand command = new SQLiteCommand(query, Model.connection)) {
 					
@@ -285,7 +291,7 @@ namespace BugTracker.Manager_Classes {
 		}
 		public SuccessMessage UnassignBug(string Designation) {
 
-			string query = "  UPDATE Bugs SET BugStatus = 'Unassigned', AccountId = NULL WHERE BugDesignation = @Designation";
+			string query = "UPDATE Bugs SET BugStatus = 'Unassigned', AccountId = NULL WHERE BugDesignation = @Designation";
 
 			using(SQLiteCommand command = new SQLiteCommand(query, Model.connection)) {
 				
@@ -297,7 +303,7 @@ namespace BugTracker.Manager_Classes {
 			return new SuccessMessage();
 		}
 		public bool DoesBugDesignationExist(string Designation) {
-			using(SQLiteCommand command = new SQLiteCommand("  SELECT Retired FROM Projects WHERE BugDesignation = @Designation", Model.connection)) {
+			using(SQLiteCommand command = new SQLiteCommand("SELECT Retired FROM Projects WHERE BugDesignation = @Designation", Model.connection)) {
 
 				command.Parameters.AddWithValue("@Designation", Designation);
 				using(SQLiteDataReader DataReader = command.ExecuteReader()) {

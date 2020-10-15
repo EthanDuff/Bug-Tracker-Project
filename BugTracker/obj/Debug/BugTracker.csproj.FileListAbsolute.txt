@@ -67,7 +67,6 @@ C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Debug\System.Data
 C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Debug\System.Memory.xml
 C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\obj\Debug\BugTracker.csprojAssemblyReference.cache
 C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\obj\Debug\BugTracker.Properties.Resources.resources
 C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\obj\Debug\BugTracker.TopForm.resources
 C:\Users\ethan\source\repos\Bug Tracker Project\BugTracker\obj\Debug\BugTracker.csproj.GenerateResource.cache

@@ -137,6 +137,7 @@ namespace BugTracker {
 			Console.WriteLine("New PW:  " + _ActiveAccount.Password);
 			return ChangePasswordAttempt;
 		}
+
 		public List<Account> GetAllAccounts() {
 			return _AccountManager.GetAllAccounts();
 		}
@@ -322,7 +323,7 @@ namespace BugTracker {
 		}
 		public string GetProjectDesignation(int ProjectId) {
 
-			string query = "  SELECT BugDesignation FROM Projects WHERE ProjectId = @Id";
+			string query = "SELECT BugDesignation FROM Projects WHERE ProjectId = @Id";
 
 			using(SQLiteCommand command = new SQLiteCommand(query, _connection)) {
 				command.Parameters.AddWithValue("@Id", ProjectId);
@@ -376,18 +377,18 @@ namespace BugTracker {
 				// Create Tables
 				using(SQLiteCommand command = new SQLiteCommand("" +
 					"CREATE TABLE \"UserAccounts\"(" +
-					"\"UserId\"    int NOT NULL," +
+					"\"UserId\"  int NOT NULL," +
 					"\"UserEmail\" nvarchar(25) NOT NULL," +
-					"\"UserName\"  nvarchar(25) NOT NULL," +
-					"\"UserRole\"  nvarchar(13) NOT NULL," +
-					"\"UserPassword\"  nvarchar(25) NOT NULL," +
+					"\"UserName\"nvarchar(25) NOT NULL," +
+					"\"UserRole\"nvarchar(13) NOT NULL," +
+					"\"UserPassword\"nvarchar(25) NOT NULL," +
 					"\"UserImage\" blob NOT NULL," +
 					"PRIMARY KEY(\"UserId\"));", _connection)) {
 					command.ExecuteNonQuery();
 				}
 				using(SQLiteCommand command = new SQLiteCommand("" +
 					"CREATE TABLE Projects (" +
-					"\"ProjectId\"        int NOT NULL," +
+					"\"ProjectId\"      int NOT NULL," +
 					"\"ProjectName\" nvarchar(50) NOT NULL, " +
 					"\"ProjectDescription\" nvarchar(500) NOT NULL, " +
 					"\"BugDesignation\" nchar(2) NOT NULL, " +
